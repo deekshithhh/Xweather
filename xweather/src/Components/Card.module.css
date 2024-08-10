@@ -1,7 +1,8 @@
 .card {
     display: flex;
     gap: 10px;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     margin-top: 10px;
+
 }
