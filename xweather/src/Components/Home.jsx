@@ -57,6 +57,7 @@ export default function Xweather() {
             alert("Failed to fetch weather data")
         }
         finally {
+            clearTimeout(timeoutId);
             setIsloading(false)
         }
     }
