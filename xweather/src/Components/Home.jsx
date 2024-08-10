@@ -25,7 +25,9 @@ export default function Xweather() {
     }
 
     const Callweather = async (city) => {
-        setIsloading(true)
+        const timeoutId = setTimeout(() => {
+            setIsloading(true);
+        }, 500);
         try {
             const response = await axios.get(' https://api.weatherapi.com/v1/current.json', {
                 params: {
