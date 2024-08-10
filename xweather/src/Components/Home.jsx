@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cards from './Card';
-import styles from './Card.module.css'
+// import weather-cards from './Card.module.css'
 
 export default function Xweather() {
     const [temp, setTemp] = useState('');
@@ -66,7 +66,10 @@ export default function Xweather() {
             <button type="submit">Search</button >
         </form >
 
-            {isloading ? <p>Loading data…</p> : <div className={styles.card}>
+            {isloading ? <p>Loading data…</p> : <div className="weather-cards" style={{
+                display: 'flex', gap: '10px',
+                justifyContent: 'center', marginTop: '15px'
+            }} >
                 <Cards title="Temperature" value={temp} />
                 <Cards title="Humidity" value={humidity} />
                 <Cards title="Condition" value={condition} />
@@ -76,7 +79,7 @@ export default function Xweather() {
             }
 
 
-        </div>
+        </div >
 
 
     )
