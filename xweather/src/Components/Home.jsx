@@ -8,6 +8,7 @@ export default function Xweather() {
     const [humidity, setHumidity] = useState('');
     const [wind, setWind] = useState('');
     const [condition, setCondition] = useState('');
+    const [isloading, setIsloading] = useState(false)
     const [formdata, setFormdata] = useState({
         temp: temp,
         hum: humidity,
@@ -19,11 +20,12 @@ export default function Xweather() {
         e.preventDefault();
         console.log(city)
         // setCity(e.target.value)
+        setIsloading(true)
         Callweather(city)
     }
 
     const Callweather = async (city) => {
-
+        setIsloading(true)
         try {
             const response = await axios.get(' https://api.weatherapi.com/v1/current.json', {
                 params: {
@@ -40,6 +42,7 @@ export default function Xweather() {
             setTemp(response.data.current.temp_c);
             setHumidity(response.data.current.humidity)
 
+
             // console.log(response.data.current.condition.text, "Text");
             // console.log(response.data.current.humidity);
             // console.log(response.data.current.wind_kph);
@@ -51,7 +54,9 @@ export default function Xweather() {
         catch (e) {
             alert("Failed to fetch weather data")
         }
-
+        finally {
+            setIsloading(false)
+        }
     }
 
 
@@ -60,12 +65,16 @@ export default function Xweather() {
             <input type="text" onChange={(e) => { setCity(e.target.value) }} />
             <button type="submit">Search</button >
         </form >
-            <div className={styles.card}>
+
+            {isloading ? <p>Loading data…</p> : <div className={styles.card}>
                 <Cards title="Temperature" value={temp} />
                 <Cards title="Humidity" value={humidity} />
                 <Cards title="Condition" value={condition} />
                 <Cards title="Wind Speed" value={wind} />
             </div>
+
+            }
+
 
         </div>
 
